@@ -53,7 +53,7 @@ document.addEventListener("pointermove",(e)=>{
 
 let typed = "";
 
-document.addEventListener("keydown", (e)=>{
+document.addEventListener("keydown", (e)=> {
 
     typed += e.key.toLowerCase();
 
@@ -63,13 +63,11 @@ document.addEventListener("keydown", (e)=>{
 
         const img = document.getElementById("easterEgg");
 
-        img.style.opacity = "1";
+        img.style.display = "block";
 
-        setTimeout(()=>{
-
-            img.style.opacity = "0";
-
-        },1000);
+        setTimeout(() => {
+            img.style.display = "none";
+        }, 1000);
 
         typed = "";
 
