@@ -50,3 +50,29 @@ document.addEventListener("pointermove",(e)=>{
     }
 
 });
+
+let typed = "";
+
+document.addEventListener("keydown", (e)=>{
+
+    typed += e.key.toLowerCase();
+
+    typed = typed.slice(-20);
+
+    if(typed.includes("karafi")){
+
+        const img = document.getElementById("easterEgg");
+
+        img.style.opacity = "1";
+
+        setTimeout(()=>{
+
+            img.style.opacity = "0";
+
+        },1000);
+
+        typed = "";
+
+    }
+
+});
