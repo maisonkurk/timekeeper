@@ -1,8 +1,6 @@
 # Timekeeper
 
-A minimalist, gesture-based presentation timer designed for meetings, speeches, workshops, and events.
-
-Instead of using a traditional slider, Timekeeper lets users adjust the countdown simply by dragging vertically on the screen. Built with a clean, distraction-free interface inspired by modern iOS design.
+for events and crap, still in absolute beta so means you still gotta use timer in ur iphone, this works as a slider where you can drag up  and down and crap.
 
 ## Features
 
