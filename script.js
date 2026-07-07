@@ -67,7 +67,7 @@ document.addEventListener("keydown", (e)=> {
 
         setTimeout(() => {
             img.style.display = "none";
-        }, 1000);
+        }, 200);
 
         typed = "";
 
