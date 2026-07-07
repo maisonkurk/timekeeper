@@ -37,9 +37,9 @@ body{
 }
 
 #number{
-    font-size:26vw;
+    font-size:30vw;
     font-family:'Lato', sans-serif;
-    font-weight:900; /* Lato Black */
+    font-weight:900;
     line-height:0.85;
 
     color:#121212;
@@ -48,16 +48,17 @@ body{
 }
 
 #label{
-    margin-top:10px;
+    margin-top:18px;
 
-    font-size:1.5rem;
+    font-size:2.8rem;
     font-family:'Lato', sans-serif;
-    font-weight:700;
+    font-weight:900; /* Lato Black */
 
-    letter-spacing:6px;
+    letter-spacing:4px;
+    text-transform:uppercase;
 
-    color:#242526;
-    opacity:0.8;
+    color:#121212;
+    opacity:1;
 }
 
 #footer{
