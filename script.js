@@ -41,7 +41,7 @@ document.addEventListener("pointermove",(e)=>{
 
         }
 
-        minutes = Math.max(1,Math.min(60,minutes));
+        minutes = Math.max(0,Math.min(60,minutes));
 
         update();
 
