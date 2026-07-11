@@ -14,6 +14,10 @@ const messageScreen = document.getElementById("messageScreen");
 const messageBox = document.getElementById("messageBox");
 const messageText = document.getElementById("messageText");
 
+const messageToolbar = document.getElementById("messageToolbar");
+const editBtn = document.getElementById("editBtn");
+const doneBtn = document.getElementById("doneBtn");
+
 // ====================================
 // VARIABLES
 // ====================================
@@ -98,35 +102,48 @@ messageBox.addEventListener("click", () => {
 
     messageBox.classList.add("selected");
 
+    messageToolbar.style.display = "flex";
+
 });
 
 document.addEventListener("click", (e) => {
 
-    if (!messageBox.contains(e.target)) {
+    if (
+        !messageBox.contains(e.target) &&
+        !messageToolbar.contains(e.target)
+    ){
 
         selected = false;
 
         messageBox.classList.remove("selected");
 
+        messageToolbar.style.display = "none";
+
     }
 
 });
 
-messageText.addEventListener("dblclick", () => {
-
-    if (!selected) return;
+editBtn.onclick = () => {
 
     messageText.contentEditable = true;
 
     messageText.focus();
 
-});
+    editBtn.style.display = "none";
+    doneBtn.style.display = "inline-block";
 
-messageText.addEventListener("blur",()=>{
+};
 
-    messageText.contentEditable=false;
+doneBtn.onclick = () => {
 
-});
+    messageText.contentEditable = false;
+
+    messageText.blur();
+
+    editBtn.style.display = "inline-block";
+    doneBtn.style.display = "none";
+
+};
 
 // ====================================
 // DRAGGING

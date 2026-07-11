@@ -168,3 +168,39 @@ body{
     border-radius:8px;
 
 }
+
+#messageToolbar{
+
+    position:absolute;
+
+    top:90px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    display:none;
+
+    gap:15px;
+
+    z-index:999;
+
+}
+
+#messageToolbar button{
+
+    border:none;
+
+    padding:12px 22px;
+
+    border-radius:999px;
+
+    background:#121212;
+
+    color:white;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+}
