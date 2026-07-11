@@ -11,6 +11,7 @@ const messageTab = document.getElementById("messageTab");
 const timerScreen = document.getElementById("timerScreen");
 const messageScreen = document.getElementById("messageScreen");
 
+const messageBox = document.getElementById("messageBox");
 const messageText = document.getElementById("messageText");
 
 // ====================================
@@ -91,6 +92,26 @@ messageTab.onclick=()=>{
 // MESSAGE EDITING
 // ====================================
 
+messageBox.addEventListener("click", () => {
+
+    selected = true;
+
+    messageBox.classList.add("selected");
+
+});
+
+document.addEventListener("click", (e) => {
+
+    if (!messageBox.contains(e.target)) {
+
+        selected = false;
+
+        messageBox.classList.remove("selected");
+
+    }
+
+});
+
 messageText.addEventListener("dblclick", () => {
 
     if (!selected) return;
@@ -111,14 +132,23 @@ messageText.addEventListener("blur",()=>{
 // DRAGGING
 // ====================================
 
-interact("#messageText").draggable({
+interact("#messageBox").draggable({
 
     listeners:{
 
         move(event){
 
-            x+=event.dx;
-            y+=event.dy;
+            move(event){
+
+    if(!selected) return;
+
+    x += event.dx;
+    y += event.dy;
+
+    event.target.style.transform =
+        `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+
+}
 
             event.target.style.transform=
                 `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;

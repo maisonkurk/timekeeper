@@ -121,6 +121,26 @@ body{
 
 #messageText{
 
+    width:100%;
+    height:100%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:10vw;
+    font-weight:900;
+
+    text-align:center;
+
+    outline:none;
+
+    white-space:pre-wrap;
+
+}
+
+#messageBox{
+
     position:absolute;
 
     left:50%;
@@ -128,18 +148,14 @@ body{
 
     transform:translate(-50%,-50%);
 
-    font-size:10vw;
-    font-weight:900;
+    min-width:300px;
+    min-height:120px;
 
-    text-align:center;
-
-    white-space:pre-wrap;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 
     cursor:move;
-
-    outline:none;
-
-    user-select:text;
 
 }
 
