@@ -50,3 +50,38 @@ document.addEventListener("pointermove",(e)=>{
     }
 
 });
+
+const timerTab = document.getElementById("timerTab");
+const messageTab = document.getElementById("messageTab");
+
+const timerScreen = document.getElementById("timerScreen");
+const messageScreen = document.getElementById("messageScreen");
+
+timerTab.onclick = ()=>{
+
+    timerScreen.style.display="flex";
+    messageScreen.style.display="none";
+
+    timerTab.classList.add("active");
+    messageTab.classList.remove("active");
+
+}
+
+messageTab.onclick = ()=>{
+
+    timerScreen.style.display="none";
+    messageScreen.style.display="flex";
+
+    messageTab.classList.add("active");
+    timerTab.classList.remove("active");
+
+}
+
+const input = document.getElementById("messageInput");
+const display = document.getElementById("messageDisplay");
+
+input.addEventListener("input",()=>{
+
+    display.textContent=input.value;
+
+});
