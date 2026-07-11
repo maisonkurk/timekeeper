@@ -14,10 +14,6 @@ const messageScreen = document.getElementById("messageScreen");
 const messageBox = document.getElementById("messageBox");
 const messageText = document.getElementById("messageText");
 
-const messageToolbar = document.getElementById("messageToolbar");
-const editBtn = document.getElementById("editBtn");
-const doneBtn = document.getElementById("doneBtn");
-
 // ====================================
 // VARIABLES
 // ====================================
@@ -93,57 +89,16 @@ messageTab.onclick=()=>{
 }
 
 // ====================================
-// MESSAGE EDITING
+// MESSAGE
 // ====================================
 
 messageBox.addEventListener("click", () => {
 
-    selected = true;
+    selected = !selected;
 
-    messageBox.classList.add("selected");
-
-    messageToolbar.style.display = "flex";
+    messageBox.classList.toggle("selected");
 
 });
-
-document.addEventListener("click", (e) => {
-
-    if (
-        !messageBox.contains(e.target) &&
-        !messageToolbar.contains(e.target)
-    ){
-
-        selected = false;
-
-        messageBox.classList.remove("selected");
-
-        messageToolbar.style.display = "none";
-
-    }
-
-});
-
-editBtn.onclick = () => {
-
-    messageText.contentEditable = true;
-
-    messageText.focus();
-
-    editBtn.style.display = "none";
-    doneBtn.style.display = "inline-block";
-
-};
-
-doneBtn.onclick = () => {
-
-    messageText.contentEditable = false;
-
-    messageText.blur();
-
-    editBtn.style.display = "inline-block";
-    doneBtn.style.display = "none";
-
-};
 
 // ====================================
 // DRAGGING
