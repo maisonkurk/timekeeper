@@ -1,12 +1,34 @@
-console.log(interact);
+// ====================================
+// ELEMENTS
+// ====================================
 
 const number = document.getElementById("number");
+const label = document.getElementById("label");
+
+const timerTab = document.getElementById("timerTab");
+const messageTab = document.getElementById("messageTab");
+
+const timerScreen = document.getElementById("timerScreen");
+const messageScreen = document.getElementById("messageScreen");
+
+const messageText = document.getElementById("messageText");
+
+// ====================================
+// VARIABLES
+// ====================================
 
 let minutes = 5;
-
 let startY = 0;
 
-// Update number
+let x = 0;
+let y = 0;
+
+let selected = false;
+
+// ====================================
+// TIMER
+// ====================================
+
 function update(){
 
     number.textContent = minutes;
@@ -15,33 +37,21 @@ function update(){
 
 update();
 
-
-// Finger touches screen
-document.addEventListener("pointerdown",(e)=>{
+timerScreen.addEventListener("pointerdown",(e)=>{
 
     startY = e.clientY;
 
 });
 
+timerScreen.addEventListener("pointermove",(e)=>{
 
-// Finger moves
-document.addEventListener("pointermove",(e)=>{
-
-    if(e.buttons!==1) return;
+    if(e.pointerType==="mouse" && e.buttons!==1) return;
 
     const diff = startY - e.clientY;
 
-    if(Math.abs(diff) > 35){
+    if(Math.abs(diff)>35){
 
-        if(diff > 0){
-
-            minutes++;
-
-        }else{
-
-            minutes--;
-
-        }
+        minutes += diff>0 ? 1 : -1;
 
         minutes = Math.max(0,Math.min(60,minutes));
 
@@ -53,13 +63,11 @@ document.addEventListener("pointermove",(e)=>{
 
 });
 
-const timerTab = document.getElementById("timerTab");
-const messageTab = document.getElementById("messageTab");
+// ====================================
+// TABS
+// ====================================
 
-const timerScreen = document.getElementById("timerScreen");
-const messageScreen = document.getElementById("messageScreen");
-
-timerTab.onclick = ()=>{
+timerTab.onclick=()=>{
 
     timerScreen.style.display="flex";
     messageScreen.style.display="none";
@@ -69,7 +77,7 @@ timerTab.onclick = ()=>{
 
 }
 
-messageTab.onclick = ()=>{
+messageTab.onclick=()=>{
 
     timerScreen.style.display="none";
     messageScreen.style.display="flex";
@@ -78,3 +86,45 @@ messageTab.onclick = ()=>{
     timerTab.classList.remove("active");
 
 }
+
+// ====================================
+// MESSAGE EDITING
+// ====================================
+
+messageText.addEventListener("dblclick", () => {
+
+    if (!selected) return;
+
+    messageText.contentEditable = true;
+
+    messageText.focus();
+
+});
+
+messageText.addEventListener("blur",()=>{
+
+    messageText.contentEditable=false;
+
+});
+
+// ====================================
+// DRAGGING
+// ====================================
+
+interact("#messageText").draggable({
+
+    listeners:{
+
+        move(event){
+
+            x+=event.dx;
+            y+=event.dy;
+
+            event.target.style.transform=
+                `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+
+        }
+
+    }
+
+});

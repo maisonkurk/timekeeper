@@ -142,3 +142,13 @@ body{
     user-select:text;
 
 }
+
+.selected{
+
+    outline:4px solid #037EF3;
+
+    outline-offset:10px;
+
+    border-radius:8px;
+
+}
