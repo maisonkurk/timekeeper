@@ -77,18 +77,3 @@ body{
     color:#242526;
     opacity:0.45;
 }
-
-#easterEgg{
-    position:fixed;
-    inset:0;
-    margin:auto;
-
-    max-width:500px;
-    width:80vw;
-
-    display:none;
-
-    pointer-events:none;
-
-    z-index:9999;
-}
