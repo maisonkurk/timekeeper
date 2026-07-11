@@ -1,3 +1,5 @@
+console.log(interact);
+
 const number = document.getElementById("number");
 
 let minutes = 5;
@@ -76,12 +78,3 @@ messageTab.onclick = ()=>{
     timerTab.classList.remove("active");
 
 }
-
-const input = document.getElementById("messageInput");
-const display = document.getElementById("messageDisplay");
-
-input.addEventListener("input",()=>{
-
-    display.textContent=input.value;
-
-});
