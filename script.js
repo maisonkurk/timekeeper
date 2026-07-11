@@ -14,6 +14,9 @@ const messageScreen = document.getElementById("messageScreen");
 const messageBox = document.getElementById("messageBox");
 const messageText = document.getElementById("messageText");
 
+const personalTab = document.getElementById("personalTab");
+const personalScreen = document.getElementById("personalScreen");
+
 // ====================================
 // VARIABLES
 // ====================================
@@ -68,25 +71,41 @@ timerScreen.addEventListener("pointermove",(e)=>{
 // TABS
 // ====================================
 
-timerTab.onclick=()=>{
+timerTab.onclick = () => {
 
-    timerScreen.style.display="flex";
-    messageScreen.style.display="none";
+    timerScreen.style.display = "flex";
+    messageScreen.style.display = "none";
+    personalScreen.style.display = "none";
 
     timerTab.classList.add("active");
     messageTab.classList.remove("active");
+    personalTab.classList.remove("active");
 
-}
+};
 
-messageTab.onclick=()=>{
+messageTab.onclick = () => {
 
-    timerScreen.style.display="none";
-    messageScreen.style.display="flex";
+    timerScreen.style.display = "none";
+    messageScreen.style.display = "flex";
+    personalScreen.style.display = "none";
 
-    messageTab.classList.add("active");
     timerTab.classList.remove("active");
+    messageTab.classList.add("active");
+    personalTab.classList.remove("active");
 
-}
+};
+
+personalTab.onclick = () => {
+
+    timerScreen.style.display = "none";
+    messageScreen.style.display = "none";
+    personalScreen.style.display = "flex";
+
+    timerTab.classList.remove("active");
+    messageTab.classList.remove("active");
+    personalTab.classList.add("active");
+
+};
 
 // ====================================
 // MESSAGE
