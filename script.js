@@ -134,23 +134,16 @@ messageText.addEventListener("blur",()=>{
 
 interact("#messageBox").draggable({
 
-    listeners:{
+    listeners: {
 
-        move(event){
+        move(event) {
 
-            move(event){
+            if (!selected) return;
 
-    if(!selected) return;
+            x += event.dx;
+            y += event.dy;
 
-    x += event.dx;
-    y += event.dy;
-
-    event.target.style.transform =
-        `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
-
-}
-
-            event.target.style.transform=
+            event.target.style.transform =
                 `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
 
         }
