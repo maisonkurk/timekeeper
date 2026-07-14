@@ -188,17 +188,18 @@ body{
 
     display:none;
     flex-direction:column;
-
     justify-content:center;
-
     align-items:center;
+    gap:30px;
 
-    gap:40px;
     padding:30px;
 
 }
 
 #messageInput{
+
+    position:absolute;
+    top:70px;
 
     width:min(900px,90vw);
     height:100px;
@@ -209,8 +210,8 @@ body{
 
     border:2px solid #ccc;
     border-radius:12px;
-}
 
+}
 #messageText{
 
     font-size:10vw;
