@@ -188,20 +188,18 @@ body{
 }
 
 #messageInput{
+    position:absolute;
+    top:70px;
 
     width:min(900px,90vw);
-    height:120px;
+    height:100px;
 
     padding:20px;
 
     font-size:1.3rem;
-    font-family:'Lato',sans-serif;
 
     border:2px solid #ccc;
     border-radius:12px;
-
-    resize:none;
-
 }
 
 #messageText{

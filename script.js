@@ -11,8 +11,8 @@ const messageTab = document.getElementById("messageTab");
 const timerScreen = document.getElementById("timerScreen");
 const messageScreen = document.getElementById("messageScreen");
 
-const messageBox = document.getElementById("messageBox");
 const messageInput = document.getElementById("messageInput");
+const messageText = document.getElementById("messageText");
 
 const personalTab = document.getElementById("personalTab");
 const personalScreen = document.getElementById("personalScreen");
