@@ -12,7 +12,7 @@ const timerScreen = document.getElementById("timerScreen");
 const messageScreen = document.getElementById("messageScreen");
 
 const messageBox = document.getElementById("messageBox");
-const messageText = document.getElementById("messageText");
+const messageInput = document.getElementById("messageInput");
 
 const personalTab = document.getElementById("personalTab");
 const personalScreen = document.getElementById("personalScreen");
@@ -24,18 +24,29 @@ const personalScreen = document.getElementById("personalScreen");
 let minutes = 5;
 let startY = 0;
 
-let x = 0;
-let y = 0;
-
-let selected = false;
-
 // ====================================
 // TIMER
 // ====================================
 
 function update(){
 
-    number.textContent = minutes;
+    if(minutes >= 0){
+
+        number.textContent = minutes;
+        label.textContent = "MINUTES";
+
+        number.style.color = "#121212";
+        label.style.color = "#121212";
+
+    }else{
+
+        number.textContent = Math.abs(minutes);
+        label.textContent = "MINUTES OVERTIME";
+
+        number.style.color = "#d62828";
+        label.style.color = "#d62828";
+
+    }
 
 }
 
@@ -55,9 +66,10 @@ timerScreen.addEventListener("pointermove",(e)=>{
 
     if(Math.abs(diff)>35){
 
-        minutes += diff>0 ? 1 : -1;
+        minutes += diff > 0 ? 1 : -1;
 
-        minutes = Math.max(0,Math.min(60,minutes));
+        // Optional upper limit
+        minutes = Math.min(60, minutes);
 
         update();
 
@@ -111,33 +123,15 @@ personalTab.onclick = () => {
 // MESSAGE
 // ====================================
 
-messageBox.addEventListener("click", () => {
+messageInput.addEventListener("input", () => {
 
-    selected = !selected;
+    if (messageInput.value.trim() === "") {
 
-    messageBox.classList.toggle("selected");
+        messageText.textContent = "Still WIP, do not use";
 
-});
+    } else {
 
-// ====================================
-// DRAGGING
-// ====================================
-
-interact("#messageBox").draggable({
-
-    listeners: {
-
-        move(event) {
-
-            if (!selected) return;
-
-            x += event.dx;
-            y += event.dy;
-
-            event.target.style.transform =
-                `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
-
-        }
+        messageText.textContent = messageInput.value;
 
     }
 
