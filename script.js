@@ -21,7 +21,7 @@ const personalScreen = document.getElementById("personalScreen");
 // VARIABLES
 // ====================================
 
-let Value = 5;
+let timerValue = 5;
 let unit = "minutes";
 let startY = 0;
 
@@ -31,9 +31,9 @@ let startY = 0;
 
 function update(){
 
-    number.textContent = Math.abs(value);
+    number.textContent = Math.abs(timerValue);
 
-    if(value >= 0){
+    if(timerValue >= 0){
 
         number.style.color = "#121212";
         label.style.color = "#121212";
@@ -83,15 +83,15 @@ timerScreen.addEventListener("pointermove",(e)=>{
 
     if(Math.abs(diff)>35){
 
-        value += diff > 0 ? 1 : -1;
+        timerValue += diff > 0 ? 1 : -1;
 
    if(unit === "minutes"){
 
-    value = Math.min(60, value);
+    timerValue = Math.min(60, timerValue);
 
 }else{
 
-    value = Math.min(59, value);
+    timerValue = Math.min(59, timerValue);
 
 }
 
@@ -158,9 +158,9 @@ label.addEventListener("click", () => {
     if(unit === "minutes"){
         unit = "seconds";
 
-        if(Math.abs(value) > 59){
+        if(Math.abs(timerValue) > 59){
 
-            value = value >= 0 ? 59 : -59;
+            timerValue = timerValue >= 0 ? 59 : -59;
 
         }
 
