@@ -101,6 +101,15 @@ body{
 
     color:#121212;
     opacity:1;
+
+    cursor:pointer;
+    transition:.15s ease;
+}
+
+#label:active{
+
+    transform:scale(.96);
+
 }
 
 #footer{

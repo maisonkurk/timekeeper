@@ -21,7 +21,8 @@ const personalScreen = document.getElementById("personalScreen");
 // VARIABLES
 // ====================================
 
-let minutes = 5;
+let Value = 5;
+let unit = "minutes";
 let startY = 0;
 
 // ====================================
@@ -30,21 +31,37 @@ let startY = 0;
 
 function update(){
 
-    if(minutes >= 0){
+    number.textContent = Math.abs(value);
 
-        number.textContent = minutes;
-        label.textContent = "MINUTES";
+    if(value >= 0){
 
         number.style.color = "#121212";
         label.style.color = "#121212";
 
-    }else{
+        if(unit === "minutes"){
 
-        number.textContent = Math.abs(minutes);
-        label.textContent = "MINUTES OVERTIME";
+            label.textContent = "MINUTES ↻";
+
+        }else{
+
+            label.textContent = "SECONDS ↻";
+
+        }
+
+    }else{
 
         number.style.color = "#d62828";
         label.style.color = "#d62828";
+
+        if(unit === "minutes"){
+
+            label.textContent = "MINUTES OVERTIME ↻";
+
+        }else{
+
+            label.textContent = "SECONDS OVERTIME ↻";
+
+        }
 
     }
 
@@ -66,10 +83,17 @@ timerScreen.addEventListener("pointermove",(e)=>{
 
     if(Math.abs(diff)>35){
 
-        minutes += diff > 0 ? 1 : -1;
+        value += diff > 0 ? 1 : -1;
 
-        // Optional upper limit
-        minutes = Math.min(60, minutes);
+   if(unit === "minutes"){
+
+    value = Math.min(60, value);
+
+}else{
+
+    value = Math.min(59, value);
+
+}
 
         update();
 
@@ -120,6 +144,37 @@ personalTab.onclick = () => {
 };
 
 // ====================================
+// UNIT TOGGLE
+// ====================================
+
+label.addEventListener("click", () => {
+
+    if(navigator.vibrate){
+
+        navigator.vibrate(10);
+
+    }
+
+    if(unit === "minutes"){
+        unit = "seconds";
+
+        if(Math.abs(value) > 59){
+
+            value = value >= 0 ? 59 : -59;
+
+        }
+
+    }else{
+
+        unit = "minutes";
+
+    }
+
+    update();
+
+});
+
+// ====================================
 // MESSAGE
 // ====================================
 
@@ -127,7 +182,7 @@ messageInput.addEventListener("input", () => {
 
     if (messageInput.value.trim() === "") {
 
-        messageText.textContent = "Still WIP, do not use";
+        messageText.textContent = "Enter Text Above";
 
     } else {
 
