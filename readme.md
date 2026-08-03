@@ -33,8 +33,7 @@ Version 0.1.0
 
 ## Author
 
-Aziz  
-iGV ProCo
+maisonkurk
 
 ---
 
