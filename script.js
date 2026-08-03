@@ -17,6 +17,8 @@ const messageText = document.getElementById("messageText");
 const personalTab = document.getElementById("personalTab");
 const personalScreen = document.getElementById("personalScreen");
 
+const fullscreenBtn = document.getElementById("fullscreenBtn");
+
 // ====================================
 // VARIABLES
 // ====================================
@@ -187,6 +189,42 @@ messageInput.addEventListener("input", () => {
     } else {
 
         messageText.textContent = messageInput.value;
+
+    }
+
+});
+
+// ====================================
+// FULLSCREEN
+// ====================================
+
+fullscreenBtn.addEventListener("click", () => {
+
+    if (!document.fullscreenElement) {
+
+        document.documentElement.requestFullscreen();
+
+        fullscreenBtn.textContent = "Exit Fullscreen";
+
+    } else {
+
+        document.exitFullscreen();
+
+        fullscreenBtn.textContent = "Fullscreen";
+
+    }
+
+});
+
+document.addEventListener("fullscreenchange", () => {
+
+    if (document.fullscreenElement) {
+
+        fullscreenBtn.textContent = "Exit Fullscreen";
+
+    } else {
+
+        fullscreenBtn.textContent = "Fullscreen";
 
     }
 
