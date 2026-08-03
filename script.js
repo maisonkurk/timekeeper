@@ -18,6 +18,7 @@ const personalTab = document.getElementById("personalTab");
 const personalScreen = document.getElementById("personalScreen");
 
 const fullscreenBtn = document.getElementById("fullscreenBtn");
+const fullscreenIcon = document.getElementById("fullscreenIcon");
 
 // ====================================
 // VARIABLES
@@ -198,19 +199,15 @@ messageInput.addEventListener("input", () => {
 // FULLSCREEN
 // ====================================
 
-fullscreenBtn.addEventListener("click", () => {
+fullscreenBtn.addEventListener("click", async () => {
 
-    if (!document.fullscreenElement) {
+    if (!document.fullscreenElement){
 
-        document.documentElement.requestFullscreen();
+        await document.documentElement.requestFullscreen();
 
-        fullscreenBtn.textContent = "Exit Fullscreen";
+    }else{
 
-    } else {
-
-        document.exitFullscreen();
-
-        fullscreenBtn.textContent = "Fullscreen";
+        await document.exitFullscreen();
 
     }
 
@@ -218,13 +215,13 @@ fullscreenBtn.addEventListener("click", () => {
 
 document.addEventListener("fullscreenchange", () => {
 
-    if (document.fullscreenElement) {
+    if(document.fullscreenElement){
 
-        fullscreenBtn.textContent = "Exit Fullscreen";
+        fullscreenIcon.src = "images/fullscreen_exit.png";
 
-    } else {
+    }else{
 
-        fullscreenBtn.textContent = "Fullscreen";
+        fullscreenIcon.src = "images/fullscreen.png";
 
     }
 
