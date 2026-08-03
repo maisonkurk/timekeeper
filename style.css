@@ -307,7 +307,45 @@ body{
 
 #fullscreenBtn{
 
-    background:#121212;
-    color:white;
+    position:absolute;
+
+    top:18px;
+    right:22px;
+
+    width:44px;
+    height:44px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    border:none;
+    background:none;
+
+    cursor:pointer;
+
+    opacity:.45;
+
+    transition:opacity .2s ease, transform .2s ease;
+
+    z-index:1000;
+
+}
+
+#fullscreenBtn:hover{
+
+    opacity:1;
+    transform:scale(1.08);
+
+}
+
+#fullscreenIcon{
+
+    width:26px;
+    height:26px;
+
+    object-fit:contain;
+
+    pointer-events:none;
 
 }
