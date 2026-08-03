@@ -324,7 +324,7 @@ body{
 
     cursor:pointer;
 
-    opacity:.45;
+    opacity:.1;
 
     transition:opacity .2s ease, transform .2s ease;
 
