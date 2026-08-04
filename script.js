@@ -20,9 +20,6 @@ const personalScreen = document.getElementById("personalScreen");
 const fullscreenBtn = document.getElementById("fullscreenBtn");
 const fullscreenIcon = document.getElementById("fullscreenIcon");
 
-const themeBtn = document.getElementById("themeBtn");
-const themeIcon = document.getElementById("themeIcon");
-
 // ====================================
 // VARIABLES
 // ====================================
@@ -225,35 +222,6 @@ document.addEventListener("fullscreenchange", () => {
     }else{
 
         fullscreenIcon.src = "images/fullscreen.png";
-
-    }
-
-});
-
-const savedTheme = localStorage.getItem("theme");
-
-if(savedTheme === "dark"){
-
-    document.body.classList.add("dark-mode");
-    themeIcon.src = "images/sun.png";
-
-}
-
-themeBtn.addEventListener("click", () => {
-
-    document.body.classList.toggle("dark-mode");
-
-    const dark = document.body.classList.contains("dark-mode");
-
-    if(dark){
-
-        themeIcon.src = "images/sun.png";
-        localStorage.setItem("theme","dark");
-
-    }else{
-
-        themeIcon.src = "images/moon.png";
-        localStorage.setItem("theme","light");
 
     }
 
