@@ -2,6 +2,18 @@
 // ELEMENTS
 // ====================================
 
+const manualMode =
+document.getElementById("manualMode");
+
+const countdownMode =
+document.getElementById("countdownMode");
+
+const manualModeBtn =
+document.getElementById("manualModeBtn");
+
+const countdownModeBtn =
+document.getElementById("countdownModeBtn");
+
 const number = document.getElementById("number");
 const label = document.getElementById("label");
 
@@ -287,3 +299,27 @@ document.addEventListener("fullscreenchange", () => {
     }
 
 });
+
+manualModeBtn.onclick = () => {
+
+    timer.mode = "manual";
+
+    manualMode.style.display = "flex";
+    countdownMode.style.display = "none";
+
+    manualModeBtn.classList.add("active");
+    countdownModeBtn.classList.remove("active");
+
+};
+
+countdownModeBtn.onclick = () => {
+
+    timer.mode = "countdown";
+
+    manualMode.style.display = "none";
+    countdownMode.style.display = "flex";
+
+    manualModeBtn.classList.remove("active");
+    countdownModeBtn.classList.add("active");
+
+};
