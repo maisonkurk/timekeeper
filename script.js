@@ -87,16 +87,19 @@ function loadCountdown(){
 
 function updateCountdown(){
 
-    const hours =
-        Math.floor(timer.remaining / 3600);
+    const overtime = timer.remaining < 0;
 
-    const minutes =
-        Math.floor((timer.remaining % 3600) / 60);
+    const total = Math.abs(timer.remaining);
 
-    const seconds =
-        timer.remaining % 60;
+    const hours = Math.floor(total / 3600);
+
+    const minutes = Math.floor((total % 3600) / 60);
+
+    const seconds = total % 60;
 
     countdownDisplay.textContent =
+
+        `${overtime ? "-" : ""}` +
 
         `${String(hours).padStart(2,"0")}:` +
 
@@ -104,9 +107,37 @@ function updateCountdown(){
 
         `${String(seconds).padStart(2,"0")}`;
 
+    if(timer.remaining > 10){
+
+        countdownDisplay.style.color = "#121212";
+
+    }else if(timer.remaining >= 0){
+
+        countdownDisplay.style.color = "#ffb703";
+
+    }else{
+
+        countdownDisplay.style.color = "#d62828";
+
+    }
+
+    if(timer.remaining === 0){
+
+        countdownDisplay.classList.add("pulse");
+
+        setTimeout(() => {
+
+            countdownDisplay.classList.remove("pulse");
+
+        },400);
+
+    }
+
 }
 
 function showMode(mode){
+
+    if(timer.running) return;
 
     timer.mode = mode;
 
@@ -138,20 +169,6 @@ function showMode(mode){
 // ====================================
 // GESTURES
 // ====================================
-
-function getTotalSeconds(){
-
-    return (
-
-        timer.hours * 3600 +
-
-        timer.minutes * 60 +
-
-        timer.seconds
-
-    );
-
-}
 
 
 let startY = 0;
@@ -235,6 +252,8 @@ timerScreen.addEventListener("pointerdown",(e)=>{
 timerScreen.addEventListener("pointermove",(e)=>{
 
     if(e.pointerType==="mouse" && e.buttons!==1) return;
+
+    if(timer.running) return;
 
     const diff = startY - e.clientY;
 
@@ -323,6 +342,8 @@ personalTab.onclick = () => {
 // ====================================
 
 label.addEventListener("click", () => {
+
+    if(timer.running) return;
 
     if(navigator.vibrate){
 
@@ -423,5 +444,25 @@ startBtn.onclick = () => {
         updateCountdown();
 
     },1000);
+
+};
+
+pauseBtn.onclick = () => {
+
+    clearInterval(timer.interval);
+
+    timer.running = false;
+
+};
+
+resetBtn.onclick = () => {
+
+    clearInterval(timer.interval);
+
+    timer.running = false;
+
+    loadCountdown();
+
+    updateCountdown();
 
 };

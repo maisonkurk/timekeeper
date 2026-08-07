@@ -447,3 +447,115 @@ body{
     gap:16px;
 
 }
+
+#timerModes button{
+
+    border:none;
+    background:white;
+    color:#444;
+
+    padding:10px 22px;
+
+    border-radius:999px;
+
+    font-family:'Lato',sans-serif;
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+#timerModes button.active{
+
+    background:#121212;
+    color:white;
+
+}
+
+#countdownControls button{
+
+    border:none;
+
+    background:white;
+
+    color:#444;
+
+    padding:14px 28px;
+
+    border-radius:999px;
+
+    font-family:'Lato',sans-serif;
+
+    font-weight:700;
+
+    font-size:1rem;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+    box-shadow:
+        0 6px 18px rgba(0,0,0,.08);
+
+}
+
+#startBtn{
+
+    background:#121212;
+    color:white;
+
+}
+
+#pauseBtn{
+
+    background:#ffb703;
+    color:black;
+
+}
+
+#resetBtn{
+
+    background:#e9ecef;
+
+}
+
+#countdownControls button:hover{
+
+    transform:translateY(-2px);
+
+}
+
+#countdownControls button:active{
+
+    transform:scale(.95);
+
+}
+
+#manualMode,
+#countdownMode{
+
+    transition:.25s ease;
+
+}
+
+#countdownDisplay{
+
+    letter-spacing:6px;
+
+}
+
+#countdownStatus{
+
+    margin-bottom:18px;
+
+    font-size:1rem;
+
+    font-weight:700;
+
+    letter-spacing:3px;
+
+    color:#6c757d;
+
+}
