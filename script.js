@@ -21,11 +21,29 @@ const fullscreenBtn = document.getElementById("fullscreenBtn");
 const fullscreenIcon = document.getElementById("fullscreenIcon");
 
 // ====================================
-// VARIABLES
+// TIMER STATE
 // ====================================
 
-let timerValue = 5;
-let unit = "minutes";
+const timer = {
+
+    mode: "manual",
+
+    unit: "minutes",
+
+    hours: 0,
+    minutes: 5,
+    seconds: 0,
+
+    running: false,
+
+    interval: null
+
+};
+
+// ====================================
+// GESTURES
+// ====================================
+
 let startY = 0;
 
 // ====================================
@@ -34,37 +52,63 @@ let startY = 0;
 
 function update(){
 
-    number.textContent = Math.abs(timerValue);
+let currentValue;
 
-    if(timerValue >= 0){
+if (timer.unit === "hours"){
+
+    currentValue = timer.hours;
+
+}else if(timer.unit === "minutes"){
+
+    currentValue = timer.minutes;
+
+}else{
+
+    currentValue = timer.seconds;
+
+}
+
+number.textContent = Math.abs(currentValue);
+
+if(currentValue >= 0){
 
         number.style.color = "#121212";
         label.style.color = "#121212";
 
-        if(unit === "minutes"){
+switch (timer.unit) {
 
-            label.textContent = "MINUTES ↻";
+    case "hours":
+        label.textContent = "HOURS ↻";
+        break;
 
-        }else{
+    case "minutes":
+        label.textContent = "MINUTES ↻";
+        break;
 
-            label.textContent = "SECONDS ↻";
+    case "seconds":
+        label.textContent = "SECONDS ↻";
+        break;
 
-        }
+}
 
     }else{
 
         number.style.color = "#d62828";
         label.style.color = "#d62828";
 
-        if(unit === "minutes"){
+if(timer.unit === "hours"){
 
-            label.textContent = "MINUTES OVERTIME ↻";
+    label.textContent = "HOURS OVERTIME ↻";
 
-        }else{
+}else if(timer.unit === "minutes"){
 
-            label.textContent = "SECONDS OVERTIME ↻";
+    label.textContent = "MINUTES OVERTIME ↻";
 
-        }
+}else{
+
+    label.textContent = "SECONDS OVERTIME ↻";
+
+}
 
     }
 
@@ -86,15 +130,33 @@ timerScreen.addEventListener("pointermove",(e)=>{
 
     if(Math.abs(diff)>35){
 
-        timerValue += diff > 0 ? 1 : -1;
+        const change = diff > 0 ? 1 : -1;
 
-   if(unit === "minutes"){
+if(timer.unit === "hours"){
 
-    timerValue = Math.min(60, timerValue);
+    timer.hours += change;
+
+}else if(timer.unit === "minutes"){
+
+    timer.minutes += change;
 
 }else{
 
-    timerValue = Math.min(59, timerValue);
+    timer.seconds += change;
+
+}
+
+if(timer.unit === "hours"){
+
+    timer.hours = Math.min(24, timer.hours);
+
+}else if(timer.unit === "minutes"){
+
+    timer.minutes = Math.min(59, timer.minutes);
+
+}else{
+
+    timer.seconds = Math.min(59, timer.seconds);
 
 }
 
@@ -158,22 +220,21 @@ label.addEventListener("click", () => {
 
     }
 
-    if(unit === "minutes"){
-        unit = "seconds";
+if(timer.unit === "hours"){
 
-        if(Math.abs(timerValue) > 59){
+    timer.unit = "minutes";
 
-            timerValue = timerValue >= 0 ? 59 : -59;
+}else if(timer.unit === "minutes"){
 
-        }
+    timer.unit = "seconds";
 
-    }else{
+}else{
 
-        unit = "minutes";
+    timer.unit = "hours";
 
-    }
+}
 
-    update();
+update();
 
 });
 
