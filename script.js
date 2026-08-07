@@ -17,6 +17,10 @@ document.getElementById("manualModeBtn");
 const countdownModeBtn =
 document.getElementById("countdownModeBtn");
 
+const startBtn = document.getElementById("startBtn");
+const pauseBtn = document.getElementById("pauseBtn");
+const resetBtn = document.getElementById("resetBtn");
+
 const number = document.getElementById("number");
 const label = document.getElementById("label");
 
@@ -81,6 +85,56 @@ function loadCountdown(){
 
 }
 
+function updateCountdown(){
+
+    const hours =
+        Math.floor(timer.remaining / 3600);
+
+    const minutes =
+        Math.floor((timer.remaining % 3600) / 60);
+
+    const seconds =
+        timer.remaining % 60;
+
+    countdownDisplay.textContent =
+
+        `${String(hours).padStart(2,"0")}:` +
+
+        `${String(minutes).padStart(2,"0")}:` +
+
+        `${String(seconds).padStart(2,"0")}`;
+
+}
+
+function showMode(mode){
+
+    timer.mode = mode;
+
+    if(mode === "manual"){
+
+        manualMode.style.display = "flex";
+        countdownMode.style.display = "none";
+
+        manualModeBtn.classList.add("active");
+        countdownModeBtn.classList.remove("active");
+
+}else{
+
+    loadCountdown();
+
+    updateCountdown();
+
+    manualMode.style.display = "none";
+    countdownMode.style.display = "flex";
+
+    manualModeBtn.classList.remove("active");
+    countdownModeBtn.classList.add("active");
+
+}
+
+}
+
+
 // ====================================
 // GESTURES
 // ====================================
@@ -99,11 +153,6 @@ function getTotalSeconds(){
 
 }
 
-function loadCountdown(){
-
-    timer.remaining = getTotalSeconds();
-
-}
 
 let startY = 0;
 
@@ -351,24 +400,28 @@ document.addEventListener("fullscreenchange", () => {
 
 manualModeBtn.onclick = () => {
 
-    timer.mode = "manual";
-
-    manualMode.style.display = "flex";
-    countdownMode.style.display = "none";
-
-    manualModeBtn.classList.add("active");
-    countdownModeBtn.classList.remove("active");
+    showMode("manual");
 
 };
 
 countdownModeBtn.onclick = () => {
 
-    timer.mode = "countdown";
+    showMode("countdown");
 
-    manualMode.style.display = "none";
-    countdownMode.style.display = "flex";
+};
 
-    manualModeBtn.classList.remove("active");
-    countdownModeBtn.classList.add("active");
+startBtn.onclick = () => {
+
+    if(timer.running) return;
+
+    timer.running = true;
+
+    timer.interval = setInterval(() => {
+
+        timer.remaining--;
+
+        updateCountdown();
+
+    },1000);
 
 };
