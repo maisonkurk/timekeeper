@@ -402,11 +402,59 @@ body{
 
     position:absolute;
 
-    top:80px;
+    top:85px;
+
+    left:50%;
+
+    transform:translateX(-50%);
 
     display:flex;
 
-    gap:12px;
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+#manualModeBtn{
+
+    border:none;
+
+    background:#121212;
+
+    color:white;
+
+    padding:12px 24px;
+
+    border-radius:999px;
+
+    font-family:'Lato',sans-serif;
+
+    font-weight:700;
+
+    font-size:1rem;
+
+    cursor:pointer;
+
+    transition:
+        background-color .25s ease,
+        transform .18s ease,
+        box-shadow .25s ease;
+
+    box-shadow:
+        0 6px 18px rgba(0,0,0,.12);
+
+}
+
+#manualModeBtn:hover{
+
+    transform:translateY(-2px);
+
+}
+
+#manualModeBtn:active{
+
+    transform:scale(.96);
 
 }
 
