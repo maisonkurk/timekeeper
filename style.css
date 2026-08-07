@@ -559,3 +559,27 @@ body{
     color:#6c757d;
 
 }
+
+#countdownLabel{
+
+    margin-top:18px;
+
+    font-size:2rem;
+
+    font-weight:900;
+
+    letter-spacing:4px;
+
+    text-transform:uppercase;
+
+    cursor:pointer;
+
+    transition:.15s ease;
+
+}
+
+#countdownLabel:active{
+
+    transform:scale(.96);
+
+}

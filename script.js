@@ -5,6 +5,9 @@
 const countdownDisplay =
 document.getElementById("countdownDisplay");
 
+const countdownLabel =
+document.getElementById("countdownLabel");
+
 const manualMode =
 document.getElementById("manualMode");
 
@@ -53,7 +56,23 @@ const timer = {
     minutes: 5,
     seconds: 0,
 
-    remaining: 0,
+    running: false,
+
+    interval: null
+
+};
+
+const countdown = {
+
+    unit: "minutes",
+
+    hours: 0,
+
+    minutes: 5,
+
+    seconds: 0,
+
+    remaining: 300,
 
     running: false,
 
@@ -65,15 +84,15 @@ const timer = {
 // HELPER FUNCTIONS
 // ====================================
 
-function getTotalSeconds(){
+function getCountdownSeconds(){
 
     return (
 
-        timer.hours * 3600 +
+        countdown.hours * 3600 +
 
-        timer.minutes * 60 +
+        countdown.minutes * 60 +
 
-        timer.seconds
+        countdown.seconds
 
     );
 
@@ -81,21 +100,45 @@ function getTotalSeconds(){
 
 function loadCountdown(){
 
-    timer.remaining = getTotalSeconds();
+    countdown.remaining = getCountdownSeconds();
+
+    updateCountdown();
 
 }
 
 function updateCountdown(){
 
-    const overtime = timer.remaining < 0;
+    const overtime =  countdown.remaining< 0;
 
-    const total = Math.abs(timer.remaining);
+    const total = Math.abs(countdown.remaining);
 
     const hours = Math.floor(total / 3600);
 
     const minutes = Math.floor((total % 3600) / 60);
 
     const seconds = total % 60;
+
+    switch(countdown.unit){
+
+    case "hours":
+
+        countdownLabel.textContent = "HOURS ↻";
+
+        break;
+
+    case "minutes":
+
+        countdownLabel.textContent = "MINUTES ↻";
+
+        break;
+
+    case "seconds":
+
+        countdownLabel.textContent = "SECONDS ↻";
+
+        break;
+
+}
 
     countdownDisplay.textContent =
 
@@ -107,11 +150,11 @@ function updateCountdown(){
 
         `${String(seconds).padStart(2,"0")}`;
 
-    if(timer.remaining > 10){
+    if(countdown.remaining > 10){
 
         countdownDisplay.style.color = "#121212";
 
-    }else if(timer.remaining >= 0){
+    }else if(countdown.remaining >= 0){
 
         countdownDisplay.style.color = "#ffb703";
 
@@ -121,7 +164,7 @@ function updateCountdown(){
 
     }
 
-    if(timer.remaining === 0){
+    if(countdown.remaining === 0){
 
         countdownDisplay.classList.add("pulse");
 
@@ -135,9 +178,11 @@ function updateCountdown(){
 
 }
 
+
+
 function showMode(mode){
 
-    if(timer.running) return;
+    if(countdown.running) return;
 
     timer.mode = mode;
 
@@ -253,7 +298,7 @@ timerScreen.addEventListener("pointermove",(e)=>{
 
     if(e.pointerType==="mouse" && e.buttons!==1) return;
 
-    if(timer.running) return;
+    if(countdown.running) return;
 
     const diff = startY - e.clientY;
 
@@ -290,6 +335,52 @@ if(timer.unit === "hours"){
 }
 
         update();
+
+        startY = e.clientY;
+
+    }
+
+});
+
+countdownMode.addEventListener("pointerdown",(e)=>{
+
+    startY = e.clientY;
+
+});
+
+countdownMode.addEventListener("pointermove",(e)=>{
+
+    if(e.pointerType==="mouse" && e.buttons!==1) return;
+
+    if(countdown.running) return;
+
+    const diff = startY - e.clientY;
+
+    if(Math.abs(diff) > 35){
+
+        const change = diff > 0 ? 1 : -1;
+
+        if(countdown.unit === "hours"){
+
+            countdown.hours += change;
+
+            countdown.hours = Math.max(0,Math.min(24,countdown.hours));
+
+        }else if(countdown.unit === "minutes"){
+
+            countdown.minutes += change;
+
+            countdown.minutes = Math.max(0,Math.min(59,countdown.minutes));
+
+        }else{
+
+            countdown.seconds += change;
+
+            countdown.seconds = Math.max(0,Math.min(59,countdown.seconds));
+
+        }
+
+        loadCountdown();
 
         startY = e.clientY;
 
@@ -343,7 +434,7 @@ personalTab.onclick = () => {
 
 label.addEventListener("click", () => {
 
-    if(timer.running) return;
+    if(countdown.running) return;
 
     if(navigator.vibrate){
 
@@ -366,6 +457,34 @@ if(timer.unit === "hours"){
 }
 
 update();
+
+});
+
+countdownLabel.addEventListener("click",()=>{
+
+    if(countdown.running) return;
+
+    if(navigator.vibrate){
+
+        navigator.vibrate(10);
+
+    }
+
+    if(countdown.unit === "hours"){
+
+        countdown.unit = "minutes";
+
+    }else if(countdown.unit === "minutes"){
+
+        countdown.unit = "seconds";
+
+    }else{
+
+        countdown.unit = "hours";
+
+    }
+
+    updateCountdown();
 
 });
 
@@ -433,13 +552,13 @@ countdownModeBtn.onclick = () => {
 
 startBtn.onclick = () => {
 
-    if(timer.running) return;
+    if(countdown.running) return;
 
-    timer.running = true;
+    countdown.running = true;
 
-    timer.interval = setInterval(() => {
+    countdown.interval = setInterval(() => {
 
-        timer.remaining--;
+        countdown.remaining--;
 
         updateCountdown();
 
@@ -449,24 +568,18 @@ startBtn.onclick = () => {
 
 pauseBtn.onclick = () => {
 
-    console.log("Pause clicked");
+    clearInterval(countdown.interval);
 
-    clearInterval(timer.interval);
-
-    timer.running = false;
+    countdown.running = false;
 
 };
 
 resetBtn.onclick = () => {
 
-    console.log("Reset clicked");
+    clearInterval(countdown.interval);
 
-    clearInterval(timer.interval);
-
-    timer.running = false;
+    countdown.running = false;
 
     loadCountdown();
-
-    updateCountdown();
 
 };
