@@ -449,6 +449,8 @@ startBtn.onclick = () => {
 
 pauseBtn.onclick = () => {
 
+    console.log("Pause clicked");
+
     clearInterval(timer.interval);
 
     timer.running = false;
@@ -456,6 +458,8 @@ pauseBtn.onclick = () => {
 };
 
 resetBtn.onclick = () => {
+
+    console.log("Reset clicked");
 
     clearInterval(timer.interval);
 
