@@ -2,6 +2,9 @@
 // ELEMENTS
 // ====================================
 
+const countdownDisplay =
+document.getElementById("countdownDisplay");
+
 const manualMode =
 document.getElementById("manualMode");
 
@@ -46,6 +49,8 @@ const timer = {
     minutes: 5,
     seconds: 0,
 
+    remaining: 0,
+
     running: false,
 
     interval: null
@@ -53,8 +58,52 @@ const timer = {
 };
 
 // ====================================
+// HELPER FUNCTIONS
+// ====================================
+
+function getTotalSeconds(){
+
+    return (
+
+        timer.hours * 3600 +
+
+        timer.minutes * 60 +
+
+        timer.seconds
+
+    );
+
+}
+
+function loadCountdown(){
+
+    timer.remaining = getTotalSeconds();
+
+}
+
+// ====================================
 // GESTURES
 // ====================================
+
+function getTotalSeconds(){
+
+    return (
+
+        timer.hours * 3600 +
+
+        timer.minutes * 60 +
+
+        timer.seconds
+
+    );
+
+}
+
+function loadCountdown(){
+
+    timer.remaining = getTotalSeconds();
+
+}
 
 let startY = 0;
 

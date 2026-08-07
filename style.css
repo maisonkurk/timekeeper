@@ -386,3 +386,64 @@ body{
 
 }
 
+#timekeeping{
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    width:100%;
+    height:100%;
+
+}
+
+#timerModes{
+
+    position:absolute;
+
+    top:80px;
+
+    display:flex;
+
+    gap:12px;
+
+}
+
+#manualMode{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+}
+
+#countdownMode{
+
+    display:none;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:24px;
+
+}
+
+#countdownDisplay{
+
+    font-size:8vw;
+
+    font-weight:900;
+
+}
+
+#countdownControls{
+
+    display:flex;
+
+    gap:16px;
+
+}
