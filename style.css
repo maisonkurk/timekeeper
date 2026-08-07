@@ -424,12 +424,6 @@ body{
 
     display:none;
 
-    flex-direction:column;
-
-    align-items:center;
-
-    gap:24px;
-
 }
 
 #countdownDisplay{
@@ -581,5 +575,17 @@ body{
 #countdownLabel:active{
 
     transform:scale(.96);
+
+}
+
+#countdownModeBtn{
+
+    display:none;
+
+}
+
+#countdownMode{
+
+    display:none;
 
 }
